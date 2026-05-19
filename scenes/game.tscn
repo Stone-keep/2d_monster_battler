@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bo4tga3lbrbvq"]
+
+[ext_resource type="Texture2D" uid="uid://ckr0isu4oe6rb" path="res://graphics/backgrounds/background1.png" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://cca2ofqind266" path="res://graphics/back sprites/Vulkeo.png" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://e0jsnv0ayrfj" path="res://graphics/battle sprites/Cleaf.png" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://xva1mi7f0262" path="res://scenes/input_menu.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://b4mardvh12mdx" path="res://scenes/monster_status.tscn" id="5_iywne"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
+atlas = ExtResource("3_lnu2h")
+region = Rect2(0, 0, 96, 96)
+
+[node name="Game" type="Control" unique_id=849647059]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="." unique_id=1105883082]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_uwrxv")
+
+[node name="Monsters" type="Control" parent="." unique_id=947176768]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerMonster" type="TextureRect" parent="Monsters" unique_id=739959544]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+grow_vertical = 0
+texture = ExtResource("2_yqjtg")
+
+[node name="EnemyMonster" type="TextureRect" parent="Monsters" unique_id=1537904000]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.4
+anchor_right = 0.8
+anchor_bottom = 0.4
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_yqjtg")
+
+[node name="InputMenu" parent="." unique_id=80240943 instance=ExtResource("4_lbhrr")]
+layout_mode = 1
+
+[node name="Status" type="Control" parent="." unique_id=1392351047]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerStatus" parent="Status" unique_id=1358221157 instance=ExtResource("5_iywne")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.45
+anchor_right = 0.05
+anchor_bottom = 0.45
+
+[node name="EnemyStatus" parent="Status" unique_id=1804707126 instance=ExtResource("5_iywne")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.722
+anchor_top = 0.122
+anchor_right = 0.722
+anchor_bottom = 0.122
