@@ -9,7 +9,9 @@ const main_buttons = {
 }
 
 func _ready() -> void:
-	create_grid_buttons(Global.State.MAIN, main_buttons)
+	create_attack_buttons()
+	#create_grid_buttons(Global.State.MAIN, main_buttons)
+	
 
 func create_grid_buttons(state: Global.State, data: Dictionary):
 	for button in $GridContainer.get_children():
@@ -20,6 +22,12 @@ func create_grid_buttons(state: Global.State, data: Dictionary):
 		$GridContainer.add_child(grid_button)
 		grid_button.connect("press", button_handler)
 
+func create_attack_buttons():
+	var current_monster_attacks = Global.monster_data[Global.current_monster]["attacks"]
+	var monster_attack_data := {}
+	for attack in current_monster_attacks:
+		monster_attack_data[attack] = Global.attack_data[attack]["name"]
+	create_grid_buttons(Global.State.ATTACK, monster_attack_data)
+
 func button_handler(state, type):
-	print(state)
-	print(type)
+	print("test")
