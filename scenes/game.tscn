@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://e0jsnv0ayrfj" path="res://graphics/battle sprites/Cleaf.png" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://xva1mi7f0262" path="res://scenes/input_menu.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b4mardvh12mdx" path="res://scenes/monster_status.tscn" id="5_iywne"]
+[ext_resource type="Texture2D" uid="uid://46jp6dtde6vq" path="res://graphics/attack effects/claw.png" id="7_u5sy4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
 atlas = ExtResource("3_lnu2h")
@@ -48,6 +49,9 @@ anchor_bottom = 1.0
 grow_vertical = 0
 texture = ExtResource("2_yqjtg")
 
+[node name="AttackPosition" type="Marker2D" parent="Monsters/PlayerMonster" unique_id=239636231]
+position = Vector2(179, 240)
+
 [node name="EnemyMonster" type="TextureRect" parent="Monsters" unique_id=1537904000]
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
@@ -63,6 +67,9 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_yqjtg")
+
+[node name="AttackPosition" type="Marker2D" parent="Monsters/EnemyMonster" unique_id=405178889]
+position = Vector2(159, 199)
 
 [node name="InputMenu" parent="." unique_id=80240943 instance=ExtResource("4_lbhrr")]
 layout_mode = 1
@@ -91,3 +98,12 @@ anchor_left = 0.722
 anchor_top = 0.122
 anchor_right = 0.722
 anchor_bottom = 0.122
+
+[node name="AttackSprite" type="Sprite2D" parent="." unique_id=459611036]
+visible = false
+position = Vector2(679, 380)
+scale = Vector2(3, 3)
+texture = ExtResource("7_u5sy4")
+hframes = 4
+
+[connection signal="selected" from="InputMenu" to="." method="_on_input_menu_selected"]

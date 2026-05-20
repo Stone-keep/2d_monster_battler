@@ -12,6 +12,8 @@ const main_buttons = {
 
 var current_state: Global.State: set = state_handler
 
+signal selected(state: Global.State, type)
+
 func _ready() -> void:
 	create_grid_buttons(Global.State.MAIN, main_buttons)
 
@@ -76,12 +78,13 @@ func create_item_buttons():
 		owned_item_data[item] = Global.item_data[item]
 	create_list_buttons(Global.State.ITEM, owned_item_data)
 
-func handle_monster_defend():
-	print("Monster defends")
-
 func button_handler(state, type):
 	if state == Global.State.MAIN:
 		current_state = type
+		if type == Global.State.DEFEND:
+			selected.emit(Global.State.DEFEND, type)
+	else:
+		selected.emit(state, type)
 
 func focus_button(button: Button) -> void:
 	await get_tree().process_frame
@@ -99,8 +102,6 @@ func state_handler(value):
 			$GridMenu.show()
 			$ScrollContainer.hide()
 			create_attack_buttons()
-		Global.State.DEFEND:
-			handle_monster_defend()
 		Global.State.SWAP:
 			$GridMenu.hide()
 			$ScrollContainer.show()
