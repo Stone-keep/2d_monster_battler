@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://chw4gyto6h7kc"]
+
+[ext_resource type="Script" uid="uid://cbvsiiy5qr0cq" path="res://scenes/list_button.gd" id="1_4mtni"]
+[ext_resource type="Texture2D" uid="uid://8awa52p7t3p5" path="res://graphics/menu sprites/Finiette.png" id="2_4mtni"]
+
+[node name="ListButton" type="Button" unique_id=1156818501]
+custom_minimum_size = Vector2(220, 100)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_4mtni")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1966046429]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1771369008]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=602859594]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_4mtni")
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=192924824]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Monster"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
