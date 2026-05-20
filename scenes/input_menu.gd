@@ -15,32 +15,45 @@ var current_state: Global.State: set = state_handler
 func _ready() -> void:
 	create_grid_buttons(Global.State.MAIN, main_buttons)
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_released("ui_cancel") and current_state != Global.State.MAIN:
 		current_state = Global.State.MAIN
+		get_viewport().set_input_as_handled()
 
 
 func create_grid_buttons(state: Global.State, data: Dictionary):
 	for button in $GridMenu.get_children():
 		button.queue_free()
+
+	var first_button: Button = null
+
 	for key in data:
 		var grid_button = grid_button_scene.instantiate()
 		grid_button.setup(state, key, data[key])
 		$GridMenu.add_child(grid_button)
 		grid_button.connect("press", button_handler)
-	await get_tree().process_frame
-	$GridMenu.get_child(0).grab_focus()
+
+		if first_button == null:
+			first_button = grid_button
+
+	focus_button(first_button)
 
 func create_list_buttons(state: Global.State, data: Dictionary):
 	for button in $ScrollContainer/ListMenu.get_children():
 		button.queue_free()
+
+	var first_button: Button = null
+
 	for d in data:
 		var list_button = list_button_scene.instantiate()
 		list_button.setup(state, d, data)
 		$ScrollContainer/ListMenu.add_child(list_button)
 		list_button.connect("press", button_handler)
-	await get_tree().process_frame
-	$ScrollContainer/ListMenu.get_child(0).grab_focus()
+
+		if first_button == null:
+			first_button = list_button
+
+	focus_button(first_button)
 
 func create_attack_buttons():
 	var current_monster_attacks = Global.monster_data[Global.current_monster]["attacks"]
@@ -69,6 +82,11 @@ func handle_monster_defend():
 func button_handler(state, type):
 	if state == Global.State.MAIN:
 		current_state = type
+
+func focus_button(button: Button) -> void:
+	await get_tree().process_frame
+	if is_instance_valid(button):
+		button.call_deferred("grab_focus")
 
 func state_handler(value):
 	current_state = value
