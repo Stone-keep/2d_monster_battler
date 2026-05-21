@@ -9,6 +9,10 @@ func _on_input_menu_selected(state: int, type: Variant) -> void:
 		Global.State.ATTACK:
 			var target = $Monsters/EnemyMonster if Global.attack_data[type]["target"] else $Monsters/PlayerMonster
 			attack(target, type)
+		Global.State.SWAP:
+			Global.current_monster = type
+			$Monsters/PlayerMonster.texture = load(Global.monster_data[type]["back texture"])
+			$InputMenu.current_state = Global.State.MAIN
 
 func attack(target: TextureRect, attack_type: Global.Attack):
 	var attack_position

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bwyojiuvmucbu" path="res://scenes/game.gd" id="1_p57ef"]
 [ext_resource type="Texture2D" uid="uid://ckr0isu4oe6rb" path="res://graphics/backgrounds/background1.png" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://cca2ofqind266" path="res://graphics/back sprites/Vulkeo.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://e0jsnv0ayrfj" path="res://graphics/battle sprites/Cleaf.png" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://blhlf2b4y0mxn" path="res://graphics/back sprites/Atrox.png" id="3_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://xva1mi7f0262" path="res://scenes/input_menu.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b4mardvh12mdx" path="res://scenes/monster_status.tscn" id="5_iywne"]
 [ext_resource type="Texture2D" uid="uid://46jp6dtde6vq" path="res://graphics/attack effects/claw.png" id="7_u5sy4"]
@@ -47,7 +47,7 @@ anchor_top = 1.0
 anchor_right = 0.05
 anchor_bottom = 1.0
 grow_vertical = 0
-texture = ExtResource("2_yqjtg")
+texture = ExtResource("3_u5sy4")
 
 [node name="AttackPosition" type="Marker2D" parent="Monsters/PlayerMonster" unique_id=239636231]
 position = Vector2(179, 240)

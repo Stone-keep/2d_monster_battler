@@ -69,6 +69,7 @@ func create_swap_buttons():
 	var owned_monster_data := {}
 	for monster in owned_monsters:
 		owned_monster_data[monster] = Global.monster_data[monster]
+	owned_monster_data.erase(Global.current_monster)
 	create_list_buttons(Global.State.SWAP, owned_monster_data)
 
 func create_item_buttons():
