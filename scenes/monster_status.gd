@@ -10,8 +10,8 @@ func setup(is_player: bool):
 		$VBoxContainer/ProgressBar.max_value = Global.monster_data[Global.current_enemy]["max health"]
 		$VBoxContainer/ProgressBar.value = Global.monster_data[Global.current_enemy]["max health"]
 
-func update(attack_data):
-	$VBoxContainer/ProgressBar.value -= attack_data["amount"]
+func update(attack_damage):
+	$VBoxContainer/ProgressBar.value -= attack_damage
 
 func is_defeated():
 	return $VBoxContainer/ProgressBar.value <= 0
