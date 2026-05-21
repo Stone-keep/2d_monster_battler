@@ -30,10 +30,10 @@ func _on_input_menu_selected(state: int, type: Variant) -> void:
 			var target = $Monsters/EnemyMonster if Global.attack_data[type]["target"] else $Monsters/PlayerMonster
 			attack(target, type)
 			swap_enemy_on_defeat()
-			$InputMenu.current_state = Global.State.MAIN
 		Global.State.SWAP:
 			player_monster_setup(type)
-			$InputMenu.current_state = Global.State.MAIN
+	$InputMenu.hide()
+	$Monsters/EnemyMonster/EnemyTurnTimer.start()
 
 func attack(target: TextureRect, attack_type: Global.Attack):
 	var attack_position
@@ -67,3 +67,14 @@ func update_monster_stats(target, attack_data):
 		$Status/PlayerStatus.update(attack_data)
 	else:
 		$Status/EnemyStatus.update(attack_data)
+
+
+func _on_enemy_turn_timer_timeout() -> void:
+	var attack_type = Global.monster_data[Global.current_enemy]["attacks"].pick_random()
+	var target = $Monsters/PlayerMonster if Global.attack_data[attack_type]["target"] else $Monsters/EnemyMonster
+	attack(target, attack_type)
+	$InputMenu/MenuTimer.start()
+
+func _on_menu_timer_timeout() -> void:
+	$InputMenu.current_state = Global.State.MAIN
+	$InputMenu.show()

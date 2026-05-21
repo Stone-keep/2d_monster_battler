@@ -109,8 +109,15 @@ texture = SubResource("AtlasTexture_yqjtg")
 [node name="AttackPosition" type="Marker2D" parent="Monsters/EnemyMonster" unique_id=405178889]
 position = Vector2(159, 199)
 
+[node name="EnemyTurnTimer" type="Timer" parent="Monsters/EnemyMonster" unique_id=1639492631]
+wait_time = 1.5
+one_shot = true
+
 [node name="InputMenu" parent="." unique_id=80240943 instance=ExtResource("4_lbhrr")]
 layout_mode = 1
+
+[node name="MenuTimer" type="Timer" parent="InputMenu" unique_id=1404430807]
+one_shot = true
 
 [node name="Status" type="Control" parent="." unique_id=1392351047]
 layout_mode = 1
@@ -148,4 +155,6 @@ hframes = 4
 libraries/ = SubResource("AnimationLibrary_gee14")
 autoplay = &"idle"
 
+[connection signal="timeout" from="Monsters/EnemyMonster/EnemyTurnTimer" to="." method="_on_enemy_turn_timer_timeout"]
 [connection signal="selected" from="InputMenu" to="." method="_on_input_menu_selected"]
+[connection signal="timeout" from="InputMenu/MenuTimer" to="." method="_on_menu_timer_timeout"]
