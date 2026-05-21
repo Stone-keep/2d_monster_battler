@@ -1,10 +1,16 @@
 extends Control
 
-@export var animation_index := 0:
+@export var idle_animation_index := 0:
 	set(value):
-		animation_index = value
+		idle_animation_index = value
 		var atlas = $Monsters/EnemyMonster.texture as AtlasTexture
-		atlas.region.position = Vector2(96 * animation_index, 0)
+		atlas.region.position = Vector2(96 * idle_animation_index, 0)
+
+@export var attack_animation_index := 0:
+	set(value):
+		attack_animation_index = value
+		var atlas = $Monsters/EnemyMonster.texture as AtlasTexture
+		atlas.region.position = Vector2(96 * attack_animation_index, 96)
 
 var enemy_can_move := true
 var player_is_defending := false
@@ -104,6 +110,7 @@ func _on_enemy_turn_timer_timeout() -> void:
 		var attack_type = Global.monster_data[Global.current_enemy]["attacks"].pick_random()
 		var target = $Monsters/PlayerMonster if Global.attack_data[attack_type]["target"] else $Monsters/EnemyMonster
 		attack(target, attack_type)
+		$AnimationPlayer.play("attack")
 		player_was_defeated = swap_player_on_defeat()
 	enemy_can_move = true
 	player_is_defending = false
@@ -118,3 +125,8 @@ func _on_menu_timer_timeout() -> void:
 
 func _on_input_menu_visibility_changed() -> void:
 	$InputMenu.current_state = Global.State.MAIN
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "attack":
+		$AnimationPlayer.play("idle")
