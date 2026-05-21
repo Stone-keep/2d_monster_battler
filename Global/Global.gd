@@ -153,4 +153,5 @@ const item_data: Dictionary[Item, Dictionary] = {
 var current_monster: Monster
 var current_enemy: Monster
 var monsters = [Monster.ATROX, Monster.SPARCHU, Monster.CINDRILL, Monster.CLEAF, Monster.GULFIN]
+var enemy_monsters = Monster.values()
 var items = [Item.POTION, Item. ELIXIR, Item.MUSHROOM, Item.POISON]
