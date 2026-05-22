@@ -19,6 +19,8 @@ anchor_top = 0.55
 anchor_right = 0.95
 anchor_bottom = 0.95
 follow_focus = true
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
 
 [node name="ListMenu" type="VBoxContainer" parent="ScrollContainer" unique_id=1620051319]
 layout_mode = 2
